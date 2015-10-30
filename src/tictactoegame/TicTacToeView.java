@@ -11,6 +11,8 @@ import apcscvm.View;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,12 +21,13 @@ import java.awt.event.MouseEvent;
 public class TicTacToeView extends DefaultControl<TicTacToeBoard> implements View<TicTacToeBoard>
 {
     // instance variables - we need to store the width and height of the window and which player we are
-    
+    int width, height;
+    char player;
     
     // constructor - consumes a char which indicates which player this window is going to play for
     public TicTacToeView( char p )
     {
-        
+        this.player = p;
     }
     
     // paintX - paints an x in a rectangle with ULC (ULCx, ULCy) and width and height w and h
@@ -169,31 +172,55 @@ public class TicTacToeView extends DefaultControl<TicTacToeBoard> implements Vie
     {
         // save the width and height in our instance variables so that the mouse clicks
         // can get handled properly
+        this.width = w;
+        this.height = h;
         
-        
+        int size = tttb.getSize();
+        int wsize = w/size;
+        int hsize = h/size;
         // draw each square
         // if it's occupied, draw the appropriate symbol in that square
-        
-        
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < size; ++i)
+            for (int j = 0; j < size; ++j) {
+                g.drawRect(i*wsize, j*hsize, wsize, hsize);
+                if(tttb.getSquare(i, j) == 'X') paintX(g,j*wsize, i*hsize, wsize, hsize);
+                if(tttb.getSquare(i, j) == 'O') paintO(g,j*wsize, i*hsize, wsize, hsize);
+            }
         // if the game is over, display the winning line and message
-        
+        if(tttb.isGameOver())
+            paintWinningMessageAndLine(tttb, g, w, h);
     
     }
     
     // handleMouseClick
     // figures out which square the player clicked in and makes a move in that square
+    @Override
     public void handleMouseClick( TicTacToeBoard tttb, int ea, MouseEvent me )
     {
         // make sure the game isn't over
+        System.out.println("handling mouse click");
         
-            // make sure it's our turn
+        if (tttb.isGameOver()) {
+
+            tttb.reset();
+            return;
+        }        
+        // make sure it's our turn
+        int size = tttb.getSize();
+        int wsize = width/size;
+        int hsize = height/size;
+        if (tttb.getTurn() == player) {
+            System.out.println("correct player");
+            // use me.getX() and me.getY() to get the screen location of the click
+            // turn the location into a row and column (hint: this will be
+            // based on size of the board and the width and height of the window
+            int col = me.getX()/wsize;
+            int row = me.getY()/hsize;
             
-                // use me.getX() and me.getY() to get the screen location of the click
-                // turn the location into a row and column (hint: this will be
-                // based on size of the board and the width and height of the window
-                
-                // mark the square
-                
+            // mark the square
+            tttb.markSquare(row, col);
+        }
         // if the game is over, start a new one!
         
     }
@@ -202,7 +229,7 @@ public class TicTacToeView extends DefaultControl<TicTacToeBoard> implements Vie
     // returns the player for this window.
     public char getPlayer() 
     { 
-        return ' '; 
+        return player; 
     }
     
 }
