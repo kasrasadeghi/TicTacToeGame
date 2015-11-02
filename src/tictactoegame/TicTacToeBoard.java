@@ -60,9 +60,11 @@ public class TicTacToeBoard
     // markSquare - marks square (i,j) with the current player's mark and then changes the turn to the
     // other player.  If the square is already occupied or the game is over
     public void markSquare(int i, int j) {
-        if (board[i][j] == ' ')
+        if (isGameOver()) return;
+        if (board[i][j] == ' '){
             board[i][j] = (xTurn) ? 'X' : 'O';
-        xTurn = !xTurn;
+            xTurn = !xTurn;
+        }
     }
     
     // rowWinner - 
@@ -145,6 +147,8 @@ public class TicTacToeBoard
             if(colWinner(i) == 'X' || colWinner(i) == 'O') return true;
             if(rowWinner(i) == 'X' || rowWinner(i) == 'O') return true;
         }
+        if(mainDiagonalWinner() == 'X' || offDiagonalWinner() == 'X') return true;
+        if(mainDiagonalWinner() == 'O' || offDiagonalWinner() == 'O') return true;
         if (isBoardFull()) return true;
         return false;
     }
@@ -157,6 +161,8 @@ public class TicTacToeBoard
             if (colWinner(i) == 'X' || rowWinner(i) == 'X') return 'X';
             if (colWinner(i) == 'O' || rowWinner(i) == 'O') return 'O';
         }
+        if(mainDiagonalWinner() == 'X' || offDiagonalWinner() == 'X') return 'X';
+        if(mainDiagonalWinner() == 'O' || offDiagonalWinner() == 'O') return 'O';
         return ' ';
     }
 

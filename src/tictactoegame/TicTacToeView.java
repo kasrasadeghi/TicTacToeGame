@@ -222,7 +222,6 @@ public class TicTacToeView extends DefaultControl<TicTacToeBoard> implements Vie
             tttb.markSquare(row, col);
         }
         // if the game is over, start a new one!
-        
     }
     
     // getPlayer

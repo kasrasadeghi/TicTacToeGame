@@ -21,11 +21,13 @@ public class TicTacToeDumbAI extends TicTacToeView
         timer = 1000;
     }
     
+    @Override
     public void handleMouseClick( TicTacToeBoard tttb, int ea, MouseEvent me )
     {
         
     }
     
+    @Override
     public void handleTimePassage( TicTacToeBoard tttb, int ea, int dt )
     {
         if ( tttb.getTurn() == getPlayer() )
@@ -43,11 +45,16 @@ public class TicTacToeDumbAI extends TicTacToeView
     // consumes a TTTB and executes a random move
     protected void chooseAndExecuteMove( TicTacToeBoard tttb )
     {
+        int size = tttb.getSize();
+        int zeroCount = 0;
         // first, count the number of open squares
-        
+        for (int i = 0; i < size; ++i)
+            for (int j = 0; j < size; ++j) 
+                if (tttb.getSquare(i, j) == ' ') ++zeroCount;
         
         // then choose one of the squares randomly
         // choice indicates which open square to choose
+        int choice = (int)(Math.random() * zeroCount); //0, 1... zeroCount-1
         
         // write code which marks the choice-th open square
         // for example, if the board is
@@ -63,7 +70,12 @@ public class TicTacToeDumbAI extends TicTacToeView
         // Hint: use a nested-for loop to iterate over the squares, 
         // keeping track of how many open squares you have seen.  
         // When you've seen the right number, mark that square
-        
+        int choiceCount = 0;
+        for (int i = 0; i < size; ++i) 
+            for (int j = 0; j < size; ++j) 
+                if(tttb.getSquare(i,j) == ' ' && choice == choiceCount++)
+                    tttb.markSquare(i, j);
+            
     }
     
 }

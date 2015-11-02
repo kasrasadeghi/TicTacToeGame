@@ -21,8 +21,8 @@ public class TicTacToeGame
     {
 //        launchEmptyOnePlayerGame();
 //        launchDummyOnePlayerGame();
-        launchTwoPlayerGame();
-        //launchDumbAIGame();
+//        launchTwoPlayerGame();
+        launchDumbAIGame();
         //launchSmartAIGame();
     }
     
@@ -71,15 +71,17 @@ public class TicTacToeGame
     public static void launchDumbAIGame()
     {
         // Create two view objects, one for the player
+        TicTacToeView xView = new TicTacToeView('X');
         
         // one for the AI
-       
+       TicTacToeView yView = new TicTacToeDumbAI('O');
        
         // randomly select a size for the board
-        
+        TicTacToeBoard board = new TicTacToeBoard((int)(Math.random() * 3 + 3));
        
         // launch two windows which will play the game on the SAME board
-        
+        launchTTTWindow(xView, board);
+        launchTTTWindow(yView, board);
     }
     
     // launchSmartAIGame()
