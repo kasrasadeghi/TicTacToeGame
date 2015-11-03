@@ -96,14 +96,11 @@ public class TicTacToeGame
             TicTacToeView oView = new TicTacToeSmartAI('O');
             
             // randomly select a size for the board
-            //TicTacToeBoard board = new TicTacToeBoard((int)(Math.random() * 5 + 3));
-            TicTacToeBoard board = new TicTacToeBoard(7);
+            TicTacToeBoard board = new TicTacToeBoard((int)(Math.random() * 1 + 3));
+//            TicTacToeBoard board = new TicTacToeBoard(7);
             // launch two windows which will play the game on the SAME board
             launchTTTWindow(xView, board);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {}
-        launchTTTWindow(oView, board);
+            launchTTTWindow(oView, board);
     }
     
     // launchTTTWindow

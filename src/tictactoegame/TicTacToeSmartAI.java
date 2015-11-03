@@ -35,7 +35,7 @@ public class TicTacToeSmartAI extends TicTacToeDumbAI
             }
                 
         
-        //find the winning move
+//        find the winning move
 //        System.out.println("decisions grid:");
 //        for (int i = 0; i < size; ++i){
 //            for (int j = 0; j < size; ++j)
@@ -43,24 +43,33 @@ public class TicTacToeSmartAI extends TicTacToeDumbAI
 //            System.out.println("");
 //        }
 //        System.out.println("");
-        Boolean foundMove = null;
+        int foundMove = 0;
         
         for (int i = 0; i < size; ++i)
             for (int j = 0; j < size; ++j){
                 if (decisions[i][j] == 1){
-                    foundMove = true;
+//                    System.out.println("found good decision");
+                    foundMove = 1;
                     tttb.markSquare(i, j);
                 }
             }
-        if (foundMove != true) {
+        
+        breakcheck:
+        if (foundMove != 1) {
             for (int i = 0; i < size; ++i)
                 for (int j = 0; j < size; ++j){
                     if (decisions[i][j] == -1){
-                        foundMove = true;
+//                        System.out.println("check2");
+                        foundMove = -1;
                         tttb.markSquare(i, j);
+                        break breakcheck;
                     }
                 }
         }
-        if (foundMove == null) super.chooseAndExecuteMove(tttb);
+        if (foundMove == 0)  {
+            super.chooseAndExecuteMove(tttb);
+//            System.out.println("random move");
+        }
+//        System.out.println("foundMove = " + foundMove);
     }
 }
