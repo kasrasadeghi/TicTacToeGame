@@ -199,7 +199,7 @@ public class TicTacToeView extends DefaultControl<TicTacToeBoard> implements Vie
     public void handleMouseClick( TicTacToeBoard tttb, int ea, MouseEvent me )
     {
         // make sure the game isn't over
-        System.out.println("handling mouse click");
+        //System.out.println("handling mouse click");
         
         if (tttb.isGameOver()) {
 
@@ -211,7 +211,7 @@ public class TicTacToeView extends DefaultControl<TicTacToeBoard> implements Vie
         int wsize = width/size;
         int hsize = height/size;
         if (tttb.getTurn() == player) {
-            System.out.println("correct player");
+            //System.out.println("correct player");
             // use me.getX() and me.getY() to get the screen location of the click
             // turn the location into a row and column (hint: this will be
             // based on size of the board and the width and height of the window

@@ -182,4 +182,40 @@ public class TicTacToeBoard
         if(offDiagonalWinner() != ' ') return "off";
         return "nomnom";
     }
+    
+    
+    
+    /**
+     * testWin
+     * @param row
+     * @param col
+     * @param isX
+     * @return returns  1 if winner == player
+     *         returns  0 if winner == ' ' 
+     *         returns -1 if winner == other player
+     *         returns -2 if move is invalid
+     */
+    public int testWin(int row, int col, boolean isX)
+    {
+        
+        
+        char player = (isX)? 'X' : 'O';
+        char otherPlayer = (isX)? 'O' : 'X';
+        
+        if (board[row][col] == otherPlayer)
+            return -2;
+        if (board[row][col] == player)
+            return 2; 
+        int output = 0;
+        
+        board[row][col] = otherPlayer;
+        if (getWinner() == otherPlayer) output = -1;
+        
+        board[row][col] = player;
+        if (getWinner() == player) output = 1;
+        
+        board[row][col] = ' ';
+        
+        return output;
+    }
 }

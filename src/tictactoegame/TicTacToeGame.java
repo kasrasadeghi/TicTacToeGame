@@ -6,6 +6,8 @@
 package tictactoegame;
 
 import apcscvm.CVMProgram;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,8 +24,8 @@ public class TicTacToeGame
 //        launchEmptyOnePlayerGame();
 //        launchDummyOnePlayerGame();
 //        launchTwoPlayerGame();
-        launchDumbAIGame();
-        //launchSmartAIGame();
+//        launchDumbAIGame();
+        launchSmartAIGame();
     }
     
     public static void launchEmptyOnePlayerGame()
@@ -56,14 +58,14 @@ public class TicTacToeGame
     {
         // Create two view objects, one for each player
         TicTacToeView xView = new TicTacToeView('X');
-        TicTacToeView yView = new TicTacToeView('O');
+        TicTacToeView oView = new TicTacToeView('O');
        
         // randomly select a size for the board
         TicTacToeBoard board = new TicTacToeBoard((int)(Math.random() * 3 + 3));
        
         // launch two windows which will play the game on the SAME board
         launchTTTWindow(xView, board);
-        launchTTTWindow(yView, board);
+        launchTTTWindow(oView, board);
     }
     
     // launchDumbAIGame()
@@ -74,28 +76,34 @@ public class TicTacToeGame
         TicTacToeView xView = new TicTacToeView('X');
         
         // one for the AI
-       TicTacToeView yView = new TicTacToeDumbAI('O');
+        TicTacToeView oView = new TicTacToeDumbAI('O');
        
         // randomly select a size for the board
         TicTacToeBoard board = new TicTacToeBoard((int)(Math.random() * 3 + 3));
        
         // launch two windows which will play the game on the SAME board
         launchTTTWindow(xView, board);
-        launchTTTWindow(yView, board);
+        launchTTTWindow(oView, board);
     }
     
     // launchSmartAIGame()
     public static void launchSmartAIGame()
     {
-        // Create two view objects, one for the player
         
-        // one for the AI
-        
-       
-        // randomly select a size for the board
-        
-        // launch two windows which will play the game on the SAME board
-        
+            // Create two view objects, one for the player
+            TicTacToeView xView = new TicTacToeView('X');
+            // one for the AI
+            TicTacToeView oView = new TicTacToeSmartAI('O');
+            
+            // randomly select a size for the board
+            //TicTacToeBoard board = new TicTacToeBoard((int)(Math.random() * 5 + 3));
+            TicTacToeBoard board = new TicTacToeBoard(7);
+            // launch two windows which will play the game on the SAME board
+            launchTTTWindow(xView, board);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {}
+        launchTTTWindow(oView, board);
     }
     
     // launchTTTWindow
