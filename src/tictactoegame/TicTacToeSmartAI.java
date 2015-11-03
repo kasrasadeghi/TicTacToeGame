@@ -45,12 +45,14 @@ public class TicTacToeSmartAI extends TicTacToeDumbAI
 //        System.out.println("");
         int foundMove = 0;
         
+        goodbreakcheck:
         for (int i = 0; i < size; ++i)
             for (int j = 0; j < size; ++j){
                 if (decisions[i][j] == 1){
 //                    System.out.println("found good decision");
                     foundMove = 1;
                     tttb.markSquare(i, j);
+                    break goodbreakcheck;
                 }
             }
         
